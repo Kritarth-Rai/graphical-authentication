@@ -49,49 +49,86 @@ function inimg(element) {
     }
 }
 // element image recognition
-function signup() {
-    sessionStorage.setItem("upname", document.getElementById('upmail').value);
-    sessionStorage.setItem("uppass", uppass);
-    var myText = "Account Created Succesfully";
-    alert(myText);
+async function signup() {
+    // localStorage.setItem("upname", document.getElementById('upmail').value);
+    // localStorage.setItem("uppass", uppass);
+    const body = {
+        roll_no: document.getElementById('uproll').value,
+        email: document.getElementById('upmail').value,
+        password: uppass.toString()
+    }
+    let res = await fetch('http://localhost:3001/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+    })
+    if (res.status === 200) {
+        var myText = "Account Created Succesfully";
+        alert(myText);
+    } else {
+        alert('Error while creating your account')
+    }
 }
 // image pattern authentication
 var v2 = new Boolean(false);
-function signin() {
+async function signin() {
     let str = document.getElementById('inmail').value;
-    let array = sessionStorage.getItem("uppass");
-    let check1 = array.localeCompare(inpass.toString());
-    if ((!str.localeCompare(sessionStorage.getItem("upname"))) && !check1) {
-        var myText = "Login is successful";
-        alert(myText);
-        NewTab();
-        
+    // let array = sessionStorage.getItem("uppass");
+    const body = { 
+        roll_no: document.getElementById('inroll').value,
+        password: inpass.toString()
     }
-    else{
-        var myText = "Login Failed";
-        alert(myText);
+    let user = await fetch('http://localhost:3001/signin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+    })
+    // let check1 = array.localeCompare(inpass.toString());
+    if (user.status === 404) return alert('User not found')
+    if (user.status === 401) return alert('Incorrect Password')
+    if (user.status === 500) return alert('Server error')
+    if (user.status === 200) {
+        alert('Login Successful')
+        NewTab()
+    }
+    // if ((!str.localeCompare(sessionStorage.getItem("upname"))) && !check1) {
+    //     var myText = "Login is successful";
+    //     alert(myText);
+    //     NewTab();
+        
+    // }
+    // else{
+    //     var myText = "Login Failed";
+    //     alert(myText);
    
-        sendMail3();
+    //     sendMail3();
        
 
-    }
+    // }
 }
  function sendMail3(){
-    emailjs.send('service_7q1sn6s', 'template_v7f98gs')
+    emailjs.send("service_ja5bj5o","template_oydaiyh")
     .then(function(res){
-        // console.log("Success", res.status);
+        console.log("Success", res.status);
         alert("mail sent successfully");
     })
 }
 function sendMail2(){
-    emailjs.send('service_7q1sn6s', 'template_ogw30ms')
+    emailjs.send("service_ja5bj5o","template_oydaiyh")
     .then(function(res){
-        // console.log("Success", res.status);
+        console.log("Success", res.status);
         alert("mail sent successfully");
     })
 }
 
 function NewTab() {
     window.open(
-      "https://sih.gov.in/", "_blank");
+      "https://vitbhopal.ac.in/", "_blank");
 }
+
+document.getElementById('signupbtn').addEventListener('click', async () => await signup())
+document.getElementById('signinbtn').addEventListener('click', async () => await signin())

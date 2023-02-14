@@ -7,7 +7,13 @@
 
 body{
     font-family: 'Montserrat', sans-serif;
-    background: #f6f5f7;
+    background-image: url("https://cache.careers360.mobi/media/article_images/2022/7/9/VIT-Bhopal-Academic-Block.jpg");
+   background-repeat: no-repeat; /* optional */
+   background-size: cover; /* optional */
+   background-position: center center;
+   background-color: #0000006b;
+   background-blend-mode: multiply;
+   overflow-y: hidden;
 
   
     display: flex;
@@ -62,9 +68,9 @@ input{
 			0 10px 10px rgba(0,0,0,0.22);
     position: relative;
     overflow: hidden;
-    width: 768px;
+    width: 868px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 620px;
 }
 
 .form-container form {
@@ -161,7 +167,7 @@ button.ghost{
     background-color: #ff416c;
     /* background: linear-gradient(to right, #ff4b2b, #ff416c) */
     /* background: linear-gradient(to right, #E23E57, #88304E) */
-    background: linear-gradient(to right, #461111, #A13333)
+    background: linear-gradient(to right, #134f77, #2980B9)
      no-repeat 0 0 / cover;
      color: #fff;
      position: relative;
@@ -194,6 +200,12 @@ button.ghost{
 
 .overlay-left{
     transform: translateX(-20%);
+}
+
+.overlay-left img{
+    position: relative;
+    bottom:150px;
+    right:135px;
 }
 
 /* Animation */
