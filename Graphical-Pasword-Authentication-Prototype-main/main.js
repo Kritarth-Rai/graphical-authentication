@@ -57,7 +57,7 @@ async function signup() {
         email: document.getElementById('upmail').value,
         password: uppass.toString()
     }
-    let res = await fetch('http://localhost:3001/signup', {
+    let res = await fetch('https://null.kritarthrai.repl.co/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ async function signin() {
         roll_no: document.getElementById('inroll').value,
         password: inpass.toString()
     }
-    let user = await fetch('http://localhost:3001/signin', {
+    let user = await fetch('https://null.kritarthrai.repl.co/signin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
